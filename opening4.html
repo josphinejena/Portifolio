@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Developer Portfolio</title>
+    <!-- Font Awesome for icons (optional but adds polish) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ----- global reset & base ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #f4f7fc;
+            color: #1e2b37;
+            line-height: 1.6;
+        }
+
+        /* ----- hero with background image ----- */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, rgba(20, 30, 48, 0.7), rgba(8, 22, 36, 0.85)), 
+                        url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1600&q=80') no-repeat center center/cover;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: #fff;
+            padding: 2rem 5%;
+            position: relative;
+            box-shadow: inset 0 0 0 1000px rgba(10, 20, 35, 0.4);
+        }
+
+        /* navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 0.5rem 0 1.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            background: linear-gradient(120deg, #f9d976, #f39c12);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            color: #f0f4fa;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: 0.2s;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 4px;
+        }
+
+        .nav-links a:hover {
+            color: #f7c948;
+            border-bottom-color: #f7c948;
+        }
+
+        /* hero content */
+        .hero-content {
+            max-width: 750px;
+            margin: 1.5rem 0;
+            padding: 1rem 0;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 0.3rem;
+        }
+
+        .hero-content h1 span {
+            color: #f9d976;
+            text-shadow: 0 0 8px rgba(249, 217, 118, 0.3);
+        }
+
+        .hero-content h3 {
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: #d4e2f0;
+            margin-bottom: 0.3rem;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            color: #e0ebf5;
+            max-width: 500px;
+            margin: 0.8rem 0 2rem 0;
+            opacity: 0.9;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #f7c948;
+            color: #1e2b37;
+            padding: 0.9rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: 0.25s;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+            border: 2px solid transparent;
+            letter-spacing: 0.5px;
+        }
+
+        .btn:hover {
+            background: #ffe08a;
+            transform: translateY(-4px);
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25);
+        }
+
+        .btn.secondary {
+            background: transparent;
+            border: 2px solid #f7c948;
+            color: #fff;
+            box-shadow: none;
+        }
+
+        .btn.secondary:hover {
+            background: #f7c948;
+            color: #1e2b37;
+        }
+
+        /* ----- sections common ----- */
+        section {
+            padding: 5rem 5%;
+        }
+
+        h2 {
+            font-size: 2.8rem;
+            font-weight: 600;
+            margin-bottom: 2.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: #f7c948;
+            border-radius: 4px;
+        }
+
+        /* ----- projects ----- */
+        .projects {
+            background: #ffffff;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 2fr));
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .card {
+            background: #fafcff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0, 20, 40, 0.08);
+            transition: 0.3s ease;
+            border: 1px solid #e9eef3;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 20, 40, 0.12);
+            border-color: #f7c948;
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin: 1.2rem 1.2rem 0.4rem;
+            color: #1e2b37;
+        }
+
+        .card p {
+            color: #3d5060;
+            margin: 0 1.2rem 1.5rem;
+            font-size: 1rem;
+        }
+
+        /* ----- skills ----- */
+        .skills {
+            background: hwb(210 93% 7%);
+            text-align: center;
+        }
+
+        .skills h2::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.2rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .skill-list span {
+            background: white;
+            padding: 0.75rem 2rem;
+            border-radius: 60px;
+            font-weight: 500;
+            font-size: 1.15rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+            border: 1px solid #dce5ed;
+            transition: 0.2s;
+            color: #1e3b4f;
+        }
+
+        .skill-list span:hover {
+            background: #f7c948;
+            border-color: #f7c948;
+            color: #1a2935;
+            transform: scale(1.03);
+        }
+
+        /* ----- contact ----- */
+        .contact {
+            background: grey;
+            text-align: center;
+        }
+
+        .contact h2::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        form {
+            max-width: 580px;
+            margin: 1.5rem auto 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            background: #f9fcff;
+            padding: 2.5rem 2.2rem;
+            border-radius: 32px;
+            box-shadow: 0 12px 32px rgba(0, 20, 30, 0.06);
+            border: 1px solid #eef4f9;
+        }
+
+        form input,
+        form textarea {
+            width: 100%;
+            padding: 1rem 1.4rem;
+            border: 1px solid #d4dfe9;
+            border-radius: 60px;
+            font-size: 1rem;
+            background: white;
+            transition: 0.2s;
+            outline: none;
+        }
+
+        form input:focus,
+        form textarea:focus {
+            border-color: #f7c948;
+            box-shadow: 0 0 0 4px rgba(247, 201, 72, 0.15);
+        }
+
+        form textarea {
+            border-radius: 28px;
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        form button {
+            background: #1e2b37;
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: 0.25s;
+            letter-spacing: 1px;
+            border: 2px solid #1e2b37;
+        }
+
+        form button:hover {
+            background: #f7c948;
+            border-color: #f7c948;
+            color: #1e2b37;
+            transform: scale(1.02);
+        }
+
+        #status {
+            margin-top: 0.5rem;
+            font-weight: 500;
+            color: #2b7a4b;
+            min-height: 1.8rem;
+        }
+
+        /* ----- responsive tweaks ----- */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 1.5rem 6%;
+            }
+
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero-content h3 {
+                font-size: 1.4rem;
+            }
+
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+
+            nav {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                gap: 1.8rem;
+                flex-wrap: wrap;
+            }
+
+            .buttons .btn {
+                padding: 0.7rem 2rem;
+                font-size: 1rem;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+
+            form {
+                padding: 1.8rem 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            .hero-content h3 {
+                font-size: 1.2rem;
+            }
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <nav>
+            <h2 class="logo">DevPortfolio</h2>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="hero-content">
+            <h1>Hello, I'm <span>Jossy Jey</span></h1>
+            <h3>Front-End Web Developer</h3>
+            <p>I build modern, responsive and user-friendly websites.</p>
+
+            <div class="buttons">
+                <a href="#projects" class="btn">View Projects</a>
+                <a href="#skills" class="btn">My Skills</a>
+                <a href="#contact" class="btn secondary">Hire Me</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Portfolio Section -->
+    <section id="projects" class="projects">
+        <h2>My Portfolio</h2>
+
+        <div class="project-grid">
+
+            <div class="card">
+                <img src="C:\Users\Josephine\Downloads\photo-1452830978618-d6feae7d0ffa.avif" alt="Business Website">
+                <h3>Business Website</h3>
+                <p>Responsive corporate website with modern UI.</p>
+            </div>
+
+            <div class="card">
+                <img src="C:\Users\Josephine\Downloads\photo-1688561808434-886a6dd97b8c.avif" alt="E-commerce Store">
+                <h3>E-commerce Store</h3>
+                <p>Online shopping platform with cart functionality.</p>
+            </div>
+
+            <div class="card">
+                <img src="C:\Users\Josephine\Downloads\premium_photo-1661326291059-eb076cc5bdd6.avif" alt="Portfolio Website">
+                <h3>Portfolio Website</h3>
+                <p>Creative portfolio for designers and developers.</p>
+            </div>
+
+            <div class="card">
+                <img src="C:\Users\Josephine\Downloads\f1.avif" alt="Restaurant Website">
+                <h3>Restaurant Website</h3>
+                <p>Food ordering landing page with responsive layout.</p>
+            </div>
+
+            <div class="card">
+                <img src="C:\Users\Josephine\Downloads\f2.avif" alt="Blog Platform">
+                <h3>Blog Platform</h3>
+                <p>Modern blog interface with responsive design.</p>
+            </div>
+
+            <div class="card">
+                <img src="C:\Users\Josephine\Downloads\f3.jpg" alt="Dashboard UI">
+                <h3>Dashboard UI</h3>
+                <p>Admin dashboard built using HTML, CSS and JS.</p>
+            </div>
+             <div class="card">
+                <img src="C:\Users\Josephine\Downloads\f3.avif" alt="Dashboard UI">
+                <h3>Education Websites</h3>
+                <p>Where curiosity meets opportunity—welcome to our online home.</p>
+            </div>
+             <div class="card">
+                <img src="C:\Users\Josephine\Downloads\f4.avif" alt="Dashboard UI">
+                <h3>Sporting Websites</h3>
+                <p>Your ultimate destination for sports coverage, deep-dive analytics, and breaking news.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="skills">
+        <h2>My Skills</h2>
+
+        <div class="skill-list">
+            <span>HTML5</span>
+            <span>CSS3</span>
+            <span>JavaScript</span>
+            <span>Responsive Design</span>
+            <span>Bootstrap</span>
+            <span>Git</span>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="contact">
+        <h2>Contact Me</h2>
+
+        <form id="contactForm">
+            <input type="text" id="name" placeholder="Your Name">
+            <input type="email" id="email" placeholder="Email Address">
+            <textarea id="message" placeholder="Your Message"></textarea>
+            <button type="submit">Send Message</button>
+            <p id="status"></p>
+        </form>
+    </section>
+
+    <script>
+        // simple form handler (keeps the original behaviour)
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const status = document.getElementById('status');
+            status.textContent = '✅ Thank you! Your message has been sent.';
+            status.style.color = '#1e7e34';
+            this.reset();
+            setTimeout(() => { status.textContent = ''; }, 4000);
+        });
+    </script>
+
+</body>
+</html>
